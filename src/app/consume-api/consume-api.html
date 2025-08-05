@@ -1,0 +1,40 @@
+<div class="funcionarios-container">
+  <h1>Lista de Funcionários</h1>
+
+  <div *ngIf="!fetchAndStoreData" class="loading">
+    Carregando dados...
+  </div>
+
+  <div *ngIf="fetchAndStoreData" class="funcionarios-lista">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Departamento</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+        <th>Salário</th>
+        <th>Data Contratação</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let funcionario of dataRecipe">
+        <td>{{funcionario.id}}</td>
+        <td>{{funcionario.nomeCompleto}}</td>
+        <td>{{funcionario.cargo}}</td>
+        <td>{{funcionario.departamento}}</td>
+        <td>{{funcionario.email}}</td>
+        <td>{{funcionario.telefone}}</td>
+        <td>{{funcionario.salario | currency:'BRL'}}</td>
+        <td>{{funcionario.dataContratacao | date:'dd/MM/yyyy'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="dataRecipe && dataRecipe.length === 0" class="sem-dados">
+    Nenhum funcionário encontrado.
+  </div>
+</div>
