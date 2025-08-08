@@ -22,4 +22,14 @@ export class ConsumeService {
   }
 
 
+  getFuncionarios(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  deletarFuncionario(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+
+
 }

@@ -4,6 +4,7 @@ import {ConsumeService} from '../service/consume-service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {tap} from 'rxjs';
+import Funcionario from '../model/Funcionario';
 
 
 @Component({
@@ -23,10 +24,11 @@ export class ConsumeApi implements OnInit {
   constructor(
     private http: HttpClient,
     private consumeService: ConsumeService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-  // Chamando o método fetchAndStoreData e se inscrevendo no Observable retornado
+    // Chamando o método fetchAndStoreData e se inscrevendo no Observable retornado
     this.fetchAndStoreData().subscribe({
       next: () => {
         console.log('Dados recebidos com sucesso:', this.dataRecipe);
@@ -36,6 +38,7 @@ export class ConsumeApi implements OnInit {
       }
     });
   }
+
   /*
   ngOnInit(): void{
     this.consumeService.fetchAndStoreData().subscribe({
@@ -54,5 +57,20 @@ export class ConsumeApi implements OnInit {
     );
   }
 
+  deletarFuncionario(id: number): void {
+    if (confirm('Tem certeza que deseja excluir este funcionário?')) {
+      this.consumeService.deletarFuncionario(id).subscribe(
+        () => {
+          this.dataRecipe = this.dataRecipe.filter((funcionario: Funcionario) => funcionario.id !== id);
+          alert('Funcionário excluído com sucesso!');
+        },
+        (error: any) => {
+          console.error('Erro ao excluir funcionário:', error);
+          alert('Erro ao excluir funcionário. Por favor, tente novamente.');
+        }
+      )
+    }
+  }
 }
+
 

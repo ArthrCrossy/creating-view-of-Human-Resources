@@ -17,6 +17,7 @@
         <th>Telefone</th>
         <th>Salário</th>
         <th>Data Contratação</th>
+        <th>Ações</th>
       </tr>
       </thead>
       <tbody>
@@ -29,6 +30,9 @@
         <td>{{funcionario.telefone}}</td>
         <td>{{funcionario.salario | currency:'BRL'}}</td>
         <td>{{funcionario.dataContratacao | date:'dd/MM/yyyy'}}</td>
+        <td>
+          <button class="btn-excluir" (click)="deletarFuncionario(funcionario.id)">Deletar</button>
+        </td>
       </tr>
       </tbody>
     </table>
