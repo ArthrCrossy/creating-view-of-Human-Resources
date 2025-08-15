@@ -90,6 +90,12 @@ export class ConsumeApi implements OnInit {
     );
   }
 
+  orderDepartamento(dataRecipe: any[]) {
+    this.dataRecipe = dataRecipe.sort((departamentoOne: { departamento: string }, departamentoTwo: { departamento: string }) =>
+      departamentoOne.departamento.localeCompare(departamentoTwo.departamento)
+    );
+  }
+
   orderSalario(arr: { salario: number; }[]): { salario: number }[] {
     const n: number = arr.length;
     let i: number, j: number;

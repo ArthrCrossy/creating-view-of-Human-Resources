@@ -9,7 +9,7 @@ import Funcionario from '../model/Funcionario';
 export class ConsumeService {
 
   private apiUrl = 'http://localhost:8081/api/funcionarios';
-  data: Funcionario[] = []; // Para armazenar os dados
+  data: Funcionario[] = [];
 
   fetchAndStoreData(): Observable<Funcionario[]> {
     return this.http.get<Funcionario[]>(this.apiUrl);
