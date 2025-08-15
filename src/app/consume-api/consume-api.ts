@@ -19,11 +19,11 @@ import Funcionario from '../model/Funcionario';
 
 export class ConsumeApi implements OnInit {
   private apiUrl = 'http://localhost:8081/api/funcionarios';
-  dataRecipe: any; // Para armazenar os dados
+  dataRecipe: any;
 
   constructor(
     private http: HttpClient,
-    private consumeService: ConsumeService
+    private consumeService: ConsumeService,
   ) {
   }
 
@@ -71,6 +71,50 @@ export class ConsumeApi implements OnInit {
       )
     }
   }
+
+  orderName(dataRecipe: any[]) {
+    this.dataRecipe = dataRecipe.sort((nameOne: { nomeCompleto: string }, nameTwo: { nomeCompleto: string }) =>
+      nameOne.nomeCompleto.localeCompare(nameTwo.nomeCompleto)
+    );
+  }
+
+  orderEmail(dataRecipe: any[]) {
+    this.dataRecipe = dataRecipe.sort((emailOne: { email: string }, emailTwo: { email: string }) =>
+      emailOne.email.localeCompare(emailTwo.email)
+    );
+  }
+
+  orderCargo(dataRecipe: any[]) {
+    this.dataRecipe = dataRecipe.sort((cargoOne: { cargo: string }, cargoTwo: { cargo: string }) =>
+      cargoOne.cargo.localeCompare(cargoTwo.cargo)
+    );
+  }
+
+  orderSalario(arr: { salario: number; }[]): { salario: number }[] {
+    const n: number = arr.length;
+    let i: number, j: number;
+    let temp: { salario: number };
+    let swapped: boolean;
+
+    for (i = 0; i < n - 1; i++) {
+      swapped = false;
+      for (j = 0; j < n - i - 1; j++) {
+        if (arr[j].salario < arr[j + 1].salario) {
+          temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+          swapped = true;
+        }
+      }
+      if (swapped === false) {
+        break;
+      }
+    }
+
+    return arr
+
+  }
+
 }
 
 

@@ -1,44 +1,60 @@
-<div class="funcionarios-container">
-  <h1>Lista de Funcionários</h1>
+  <div class="funcionarios-container">
+    <h1>Lista de Funcionários</h1>
 
-  <div *ngIf="!fetchAndStoreData" class="loading">
-    Carregando dados...
-  </div>
+    <div *ngIf="!fetchAndStoreData" class="loading">
+      Carregando dados...
+    </div>
 
-  <div *ngIf="fetchAndStoreData" class="funcionarios-lista">
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Cargo</th>
-        <th>Departamento</th>
-        <th>E-mail</th>
-        <th>Telefone</th>
-        <th>Salário</th>
-        <th>Data Contratação</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let funcionario of dataRecipe">
-        <td>{{funcionario.id}}</td>
-        <td>{{funcionario.nomeCompleto}}</td>
-        <td>{{funcionario.cargo}}</td>
-        <td>{{funcionario.departamento}}</td>
-        <td>{{funcionario.email}}</td>
-        <td>{{funcionario.telefone}}</td>
-        <td>{{funcionario.salario | currency:'BRL'}}</td>
-        <td>{{funcionario.dataContratacao | date:'dd/MM/yyyy'}}</td>
-        <td>
-          <button class="btn-excluir" (click)="deletarFuncionario(funcionario.id)">Deletar</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <div *ngIf="fetchAndStoreData" class="funcionarios-lista">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>
+            <button class="btn-filtro" (click)="orderName(dataRecipe)" >
+            NOME
+            </button>
+          </th>
+          <th>
+            <button class="btn-filtro" (click)="orderCargo(dataRecipe)" >
+              CARGO
+            </button>
+          </th>
+          <th>Departamento</th>
+          <th>
+            <button class="btn-filtro" (click)="orderEmail(dataRecipe)" >
+              EMAIL
+            </button>
+          </th>
+          <th>Telefone</th>
+          <th>
+          <button class="btn-filtro" (click)="orderSalario(dataRecipe)"  >
+            SALÁRIO
+          </button>
+          </th>
+          <th>Data Contratação</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let funcionario of dataRecipe">
+          <td>{{funcionario.id}}</td>
+          <td>{{funcionario.nomeCompleto}}</td>
+          <td>{{funcionario.cargo}}</td>
+          <td>{{funcionario.departamento}}</td>
+          <td>{{funcionario.email}}</td>
+          <td>{{funcionario.telefone}}</td>
+          <td>{{funcionario.salario | currency:'BRL'}}</td>
+          <td>{{funcionario.dataContratacao | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <button class="btn-excluir" (click)="deletarFuncionario(funcionario.id)">Deletar</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div *ngIf="dataRecipe && dataRecipe.length === 0" class="sem-dados">
-    Nenhum funcionário encontrado.
+    <div *ngIf="dataRecipe && dataRecipe.length === 0" class="sem-dados">
+      Nenhum funcionário encontrado.
+    </div>
   </div>
-</div>
